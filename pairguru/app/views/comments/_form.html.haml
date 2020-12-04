@@ -1,0 +1,7 @@
+%h3 Write a Comment!
+= form_for [ @movie, @movie.comments.new ] do |f|
+  %p
+    = f.label :body
+    = f.text_area :body
+  %p
+    = f.submit 'Submit'

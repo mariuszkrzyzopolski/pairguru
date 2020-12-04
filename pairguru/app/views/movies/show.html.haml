@@ -1,7 +1,9 @@
 %h1= @movie.title
 .jumbotron
   = @movie.description
-  = @movie.comments.body
+  = render partial: 'comments/comment', collection: @movie.comments.reverse
 - if user_signed_in?
   %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
+  = render partial: 'comments/form'
+
 

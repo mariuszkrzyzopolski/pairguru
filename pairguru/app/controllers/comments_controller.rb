@@ -7,9 +7,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
     @comment.movie_id = params[:movie_id]
-    @comment.save
 
-    redirect_to movie_path(@comment.movie)
+    if have_comment? @comment.movie_id
+      @comment.save
+      redirect_to movie_path(@comment.movie)
+    else
+      render :err and return
+    end
+
   end
 
   def destroy
@@ -18,6 +23,14 @@ class CommentsController < ApplicationController
     if @comment.user_id == current_user_id
       @comment.destroy
     end
+  end
+
+  def have_comment? movie_id
+    @movie = Movie.find(movie_id)
+    @movie.comments.reverse.each do |comment|
+      true if comment.user_id.eql? current_user.id
+    end
+    false
   end
 
   def comment_params

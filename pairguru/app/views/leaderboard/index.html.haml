@@ -1,0 +1,6 @@
+%h1 Top 10 active users
+%ol
+  -@leaderboard.each do |user|
+    %li
+      = user.name
+      = user.comments.count()

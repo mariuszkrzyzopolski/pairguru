@@ -16,6 +16,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #
+# comment_count           :integer          default("0")
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:

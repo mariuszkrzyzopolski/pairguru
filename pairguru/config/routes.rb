@@ -16,4 +16,5 @@ Rails.application.routes.draw do
       get :export
     end
   end
+  resources :leaderboard, only: :index
 end
